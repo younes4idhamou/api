@@ -49,5 +49,5 @@ for ul in nachrichten:
 print(links[0])
 
 me=pd.DataFrame(links,columns=["ville","nombre","pharmacie","local"])
-me.to_json('data.json')
+me.to_json('../../data.json')
 print(me)
