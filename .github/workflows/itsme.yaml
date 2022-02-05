@@ -1,8 +1,6 @@
 name: py
-on: 
-      discussion_comment: [push]
-      schedule:
-         - cron: "*/5 * * * *"
+on: [push]
+      
         
 jobs:
       build:
