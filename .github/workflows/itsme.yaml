@@ -1,7 +1,9 @@
 name: py
 on: 
+      discussion_comment: [push]
       schedule:
-          - cron:  '*/5 * * * *' #runs at 12:00 UTC everyday
+         - cron: "*/5 * * * *"
+        
 jobs:
       build:
         runs-on: ubuntu-latest
