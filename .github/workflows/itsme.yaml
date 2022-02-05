@@ -11,6 +11,9 @@ jobs:
             uses: actions/setup-python@v2
             with:
               python-version: 3.8 #install the python needed
+          - name: install lxml
+            run: |
+              python -m pip install lxml
           - name: install bs4
             run: |
               python -m pip install bs4
