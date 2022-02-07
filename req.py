@@ -36,7 +36,6 @@ for ville in open('villes.txt','r'):
     soup=BeautifulSoup(webpage,'lxml')
     article=soup.find_all("article")
     for a in article:
-        pharmacies.append(pharmacie(a.a.text,ville.replace('\n',''),a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:]))
         page=a.find_all('div',{'class':'btn-results-right'})
         if len(page)!=0:
             link=page[0].a.get('href')
