@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup,Comment
-import numpy as np
+import json
 
 
 class pharmacie:
@@ -46,6 +46,11 @@ for ville in open('villes.txt','r'):
         else:
             comment=''
         
-        pharmacies.append([a.a.text,ville.replace('\n',''),a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:],comment])
+        pharmacies.append([ville.replace('\n',''),a.a.text,a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:],comment])
 df2 = pd.DataFrame(pharmacies,columns=['ville', 'nom', 'adresse','tel','cordonnee'])
-print(df2)
+out=df2.to_json(orient='records')[1:-1].replace('},{', '} {')
+output=open('file_name.txt', 'w')
+output.write("[")
+with output as f:
+    f.write(out)
+output=open('file_name.txt', 'a').write("]")
