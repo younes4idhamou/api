@@ -4,6 +4,7 @@ import requests
 import pandas as pd
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup,Comment
+import numpy as np
 
 
 class pharmacie:
@@ -27,7 +28,7 @@ class pharmacie:
     def __str__(self):
         return self.ville+": ["+self.nom+", "+self.adresse+", "+self.num+", "+self.cordonnee+"],"
     
-pharmacies=[]
+pharmacies=np.array()
 for ville in open('villes.txt','r'):
     print(ville.replace('\n','')+":")
     req=Request("https://www.telecontact.ma/services/pharmacies-de-garde/"+ville.replace('\n','')+"-Maroc", headers={'User-Agent': 'Mozilla/5.0'})
@@ -45,7 +46,6 @@ for ville in open('villes.txt','r'):
             comment = soup.find(text=lambda text:isinstance(text, Comment))
         else:
             comment=''
-        pharmacies.append(pharmacie(a.a.text,ville.replace('\n',''),a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:],comment))
-
-for k in pharmacies:
-    print(k)
+        pharmacies.append([a.a.text,ville.replace('\n',''),a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:],comment])
+df2 = pd.DataFrame(pharmacies,columns=['ville', 'nom', 'adresse','tel','cordonnee'])
+print(df2)
