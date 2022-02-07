@@ -46,6 +46,6 @@ for ville in open('villes.txt','r'):
             comment = soup.find(text=lambda text:isinstance(text, Comment))
         else:
             comment=''
-        pharmacies.append([a.a.text,ville.replace('\n',''),a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:],comment])
+        np.append(pharmacies,[a.a.text,ville.replace('\n',''),a.find_all('span',{'itemprop':'streetAddress'})[0].span.text[2:],a.find_all('div',{'class':'tel'})[0].text[2:],comment])
 df2 = pd.DataFrame(pharmacies,columns=['ville', 'nom', 'adresse','tel','cordonnee'])
 print(df2)
