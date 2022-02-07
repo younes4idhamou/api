@@ -28,7 +28,7 @@ class pharmacie:
     def __str__(self):
         return self.ville+": ["+self.nom+", "+self.adresse+", "+self.num+", "+self.cordonnee+"],"
     
-pharmacies=np.array()
+pharmacies=np.array([])
 for ville in open('villes.txt','r'):
     print(ville.replace('\n','')+":")
     req=Request("https://www.telecontact.ma/services/pharmacies-de-garde/"+ville.replace('\n','')+"-Maroc", headers={'User-Agent': 'Mozilla/5.0'})
