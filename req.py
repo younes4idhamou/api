@@ -55,3 +55,4 @@ with output as f:
     f.write(out)
 output=open('data.json', 'a').write("]")
 print(output)
+!ls output_*
