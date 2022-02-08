@@ -35,3 +35,6 @@ jobs:
               python req.py
             env:
               key: ${{ secrets.key }} # if run.py requires passwords..etc, set it as secrets
+          - name: List files 2
+            run: |
+              ls -R
